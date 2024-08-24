@@ -23,16 +23,15 @@ export class TaskService {
     throw new HttpException(`Tasks With id: ${id}`, HttpStatus.NOT_FOUND);
   }
 
-  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   findAll(params: FindAllParameters): TaskDto[] {
     return this.tasks.filter((t) => {
       let match = true;
 
-      if (params.title !== undefined && t.title !== params.title) {
+      if (params.title !== undefined && t.title.includes(params.title)) {
         match = false;
       }
 
-      if (params.status !== undefined && t.status !== params.status) {
+      if (params.status !== undefined && t.status.includes(params.status)) {
         match = false;
       }
 
